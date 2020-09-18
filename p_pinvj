@@ -1,0 +1,5 @@
+def pinv(m):
+    return np.linalg.pinv(m)
+
+def jacobian():
+    return
