@@ -80,7 +80,7 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.pushButton1.setText(_translate("MainWindow", "but1"))
         self.pushButton2.setText(_translate("MainWindow", "but2"))
-        self.label1.setText(_translate("MainWindow", "indra"))
+        self.label1.setText(_translate("MainWindow", "Indra Agustian - TE Unib"))
         self.labels1.setText(_translate("MainWindow", "Joint 1 Angle:"))
         self.labels2.setText(_translate("MainWindow", "Joint 2 angle:"))
         self.labels3.setText(_translate("MainWindow", "Joint 3 angle:"))

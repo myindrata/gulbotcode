@@ -31,7 +31,9 @@ class testqt5(Ui_MainWindow):
         j3=-60
         self.hslider1.setProperty("value", j1)
         self.hslider2.setProperty("value", j2)
-        self.hslider3.setProperty("value", j3)   
+        self.hslider3.setProperty("value", j3)
+        self.MplWidget.canvas.axes.view_init(20, -120)
+        self.draw2()
 
     def clickMe(self):
         print("hellow dunia")
@@ -67,7 +69,7 @@ class testqt5(Ui_MainWindow):
         
         self.MplWidget.canvas.axes.set_xlim([-100,100])
         self.MplWidget.canvas.axes.set_ylim([0,100])
-        self.MplWidget.canvas.axes.set_zlim([0,50])
+        self.MplWidget.canvas.axes.set_zlim([0,100])
         
         #self.MplWidget.canvas.axes.legend (( 'cosinus', 'sinus' ), loc = 'upper right' ) 
         #self.MplWidget.canvas.axes.set_title ( ' Cosinus - Sinus Signal' ) 
@@ -90,14 +92,18 @@ class testqt5(Ui_MainWindow):
         self.MplWidget.canvas.axes.plot (X1,Y1,Z1, color='green', marker='o', linestyle='solid', linewidth=10, markersize=20)
         self.MplWidget.canvas.axes.plot (X2,Y2,Z2, color='red', marker='o', linestyle='solid', linewidth=10, markersize=20)
         self.MplWidget.canvas.axes.plot (X3,Y3,Z3, color='blue', marker='o', linestyle='solid', linewidth=10, markersize=20)
-        self.MplWidget.canvas.axes.plot (X4,Y4,Z4, color='black', marker='o', linestyle='solid', linewidth=10, markersize=20)
+        self.MplWidget.canvas.axes.plot (X4,Y4,Z4, color='goldenrod', marker='o', linestyle='solid', linewidth=10, markersize=20)
+        x4=X4[1]
+        y4=Y4[1]
+        z4=Z4[1]
+        self.MplWidget.canvas.axes.text(x4,y4,z4,'({:.2f}, {:.2f}, {:.2f})'.format(x4,y4,z4), weight='bold', fontsize=12,)
         self.MplWidget.canvas.axes.set_xlabel('x')
         self.MplWidget.canvas.axes.set_ylabel('y')
         self.MplWidget.canvas.axes.set_zlabel('z')
         
-        self.MplWidget.canvas.axes.set_xlim([-100,100])
-        self.MplWidget.canvas.axes.set_ylim([0,100])
-        self.MplWidget.canvas.axes.set_zlim([0,50])
+        self.MplWidget.canvas.axes.set_xlim([-120,120])
+        self.MplWidget.canvas.axes.set_ylim([0,120])
+        self.MplWidget.canvas.axes.set_zlim([0,40])
         
         #self.MplWidget.canvas.axes.legend (( 'cosinus', 'sinus' ), loc = 'upper right' ) 
         #self.MplWidget.canvas.axes.set_title ( ' Cosinus - Sinus Signal' ) 

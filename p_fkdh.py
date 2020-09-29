@@ -68,6 +68,7 @@ def fk_draw(Q):
     ax.set_ylim([0,100])
     ax.set_zlim([0,50])
     ax.set_title('dh-fk')
+    ax.view_init(30, 120)
     plt.show()
     return X,Y,Z
 
@@ -93,8 +94,9 @@ def fk_draw2(Q):
     ax.set_ylim([0,100])
     ax.set_zlim([0,50])
     ax.set_title('dh-fk')
+    ax.view_init(20, -120)
     plt.show()
-    return X,Y,Z
+    return X1,Y1,Z1,X2,Y2,Z2,X2,Y2,Z2
 
 dh_kine.__doc__="homogeneous transformation matrix for dh parameters"
 #def XYZKine
