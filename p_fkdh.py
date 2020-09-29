@@ -54,10 +54,13 @@ def el_pos2base(Q):
 
 def fk_draw(Q):
     X,Y,Z=Q[0,:],Q[1,:],Q[2,:]
-    fig = plt.figure()
+    fig = plt.figure(num=None, figsize=(14, 20), dpi=80, facecolor='w', edgecolor='k')
     #plt.rcParams["figure.figsize"] = [30, 30]
     ax = fig.add_subplot(111, projection='3d')
-    ax.plot(X, Y, Z, marker='o')
+    
+    #ax.plot(X, Y, Z, marker='o')
+    #ax.plot(X,Y,Z, 'go--', linewidth=2, markersize=12)
+    ax.plot(X,Y,Z, color='green', marker='o', linestyle='dashed', linewidth=2, markersize=12)
     ax.set_xlabel('X')
     ax.set_ylabel('Y')
     ax.set_zlabel('Z')
@@ -68,7 +71,30 @@ def fk_draw(Q):
     plt.show()
     return X,Y,Z
 
-
+def fk_draw2(Q):
+    X1,Y1,Z1=Q[0,0:3],Q[1,0:3],Q[2,0:3]
+    X2,Y2,Z2=Q[0,2:4],Q[1,2:4],Q[2,2:4]
+    X3,Y3,Z3=Q[0,3:5],Q[1,3:5],Q[2,3:5]
+    X4,Y4,Z4=Q[0,4:6],Q[1,4:6],Q[2,4:6]
+    fig = plt.figure(num=None, figsize=(14, 20), dpi=80, facecolor='w', edgecolor='k')
+    #plt.rcParams["figure.figsize"] = [30, 30]
+    ax = fig.add_subplot(111, projection='3d')
+    
+    #ax.plot(X, Y, Z, marker='o')
+    #ax.plot(X,Y,Z, 'go--', linewidth=2, markersize=12)
+    ax.plot(X1,Y1,Z1, color='green', marker='o', linestyle='solid', linewidth=10, markersize=20)
+    ax.plot(X2,Y2,Z2, color='red', marker='o', linestyle='solid', linewidth=10, markersize=20)
+    ax.plot(X3,Y3,Z3, color='blue', marker='o', linestyle='solid', linewidth=10, markersize=20)
+    ax.plot(X4,Y4,Z4, color='black', marker='o', linestyle='solid', linewidth=10, markersize=20)
+    ax.set_xlabel('X')
+    ax.set_ylabel('Y')
+    ax.set_zlabel('Z')
+    ax.set_xlim([-100,100])
+    ax.set_ylim([0,100])
+    ax.set_zlim([0,50])
+    ax.set_title('dh-fk')
+    plt.show()
+    return X,Y,Z
 
 dh_kine.__doc__="homogeneous transformation matrix for dh parameters"
 #def XYZKine
