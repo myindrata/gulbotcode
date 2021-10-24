@@ -9,17 +9,17 @@ void readBTval(){
       Serial.print(mode);
     }
     if(cnt==1){
-      VR=inString.toInt();
-      Serial.print(" VR: ");
-      Serial.print(VR);
+      VL=inString.toInt();
+      Serial.print(" VL: ");
+      Serial.print(VL);
     }
     inString="";
     cnt++;
   }
   if(inChar=='\n'){
-    VL=inString.toInt();
-    Serial.print(" VL: ");
-    Serial.println(VL);
+    VR=inString.toInt();
+    Serial.print(" VR: ");
+    Serial.println(VR);
     inString="";
     cnt=0;
   }

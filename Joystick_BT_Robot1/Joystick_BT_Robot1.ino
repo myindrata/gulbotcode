@@ -1,7 +1,7 @@
 #include <SoftwareSerial.h>
 #include <PID_v1.h>
 
-SoftwareSerial BT(2, 3); // RX, TX
+SoftwareSerial BT(52, 53); // RX, TX
 
 int en[8];
 int mt[8];
@@ -26,7 +26,7 @@ void setup() {
   BT.begin(9600); // Default communication rate of the Bluetooth module
   delay(500);
   for(int i=0;i<8;i++){
-    en[i]=38+i;
+    en[i]=3+i;
     mt[i]=i;
     pinMode(en[i],OUTPUT);
     digitalWrite(en[i],HIGH);
@@ -46,14 +46,19 @@ void setup() {
 void loop() {
   //bluetooth control
   readBTval();
+  motor(VR);
+  motor(VL);
   //take new VR, VL as setPoint
+  /*
   RSetpoint=VR;
   LSetpoint=VL;
   RPID.Compute();
   LPID.Compute();
+  Serial.println(ROutput);
   motor((int)(ROutput+0.5));
   motor((int)(LOutput+0.5));
   //take last VR VL as input
   RInput=(int)(ROutput+0.5);
   LInput=(int)(LOutput+0.5);
+*/
 }
