@@ -1,4 +1,6 @@
 #include <SoftwareSerial.h>
+#include <PID_v1.h>
+
 SoftwareSerial BT(2, 3); // RX, TX
 
 int en[8];
@@ -7,66 +9,34 @@ int mt[8];
 int mleft, mright;
 float velo;
 String inString;
-int vx,vy,mode;
+int VR,VL,mode;
 int cnt=0;
 
+//Define Variables we'll be connecting to
+double RSetpoint, RInput, ROutput;
+double LSetpoint, LInput, LOutput;
+//Specify the links and initial tuning parameters
+double Kp=2, Ki=5, Kd=1;
+PID RPID(&RInput, &ROutput, &RSetpoint, Kp, Ki, Kd, DIRECT);
+PID LPID(&LInput, &LOutput, &LSetpoint, Kp, Ki, Kd, DIRECT);
 void setup() {
   Serial.begin(9600);
-  Serial.println("dfdffsfds");
+  Serial.println("GulbotV2");
   BT.begin(9600); // Default communication rate of the Bluetooth module
   delay(500);
 }
 
 void loop() {
+  //bluetooth control
   readBTval();
-  //if (abs(vx) <=250 && abs (vy)<=250)drive(vx, vy);
-  //drive(xAxis, yAxis);
-}
-
-void readBTval(){
- if(BT.available()>0){
-  int inChar=BT.read();
-  inString+=(char)inChar;
-  if(inChar==';'){
-    if(cnt==0){
-      mode=inString.toInt();
-      Serial.print("mode: ");
-      Serial.print(mode);
-    }
-    if(cnt==1){
-      vx=inString.toInt();
-      Serial.print(" vx: ");
-      Serial.print(vx);
-    }
-    inString="";
-    cnt++;
-  }
-  if(inChar=='\n'){
-    vy=inString.toInt();
-    Serial.print(" vy: ");
-    Serial.println(vy);
-    inString="";
-    cnt=0;
-  }
- }
-}
-void drive(float x, float y){
-  velo=sqrt(x*x+y*y)/2;
-  mleft=int(velo +float(x/2)+0.5);
-  mleft=constrain(mleft,0,250);
-  mright=int(velo -float(x/2)+0.5);
-  mright=constrain(mright,0,250);
-  Serial.print(x);
-  Serial.print(";");
-  Serial.print(y);
-  Serial.print(";");
-  Serial.print(velo);
-  Serial.print(";");
-  Serial.print(mleft);
-  Serial.print(";");
-  Serial.println(mright);
-}
-
-void kalibrasi(){
-  
+  //take new VR, VL as setPoint
+  RSetpoint=VR;
+  LSetpoint=VL;
+  RPID.Compute();
+  LPID.Compute();
+  motor((int)(ROutput+0.5));
+  motor((int)(LOutput+0.5));
+  //take last VR VL as input
+  RInput=(int)(ROutput+0.5);
+  LInput=(int)(LOutput+0.5);
 }
