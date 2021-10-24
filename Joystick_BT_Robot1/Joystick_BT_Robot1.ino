@@ -19,11 +19,28 @@ double LSetpoint, LInput, LOutput;
 double Kp=2, Ki=5, Kd=1;
 PID RPID(&RInput, &ROutput, &RSetpoint, Kp, Ki, Kd, DIRECT);
 PID LPID(&LInput, &LOutput, &LSetpoint, Kp, Ki, Kd, DIRECT);
+
 void setup() {
   Serial.begin(9600);
   Serial.println("GulbotV2");
   BT.begin(9600); // Default communication rate of the Bluetooth module
   delay(500);
+  for(int i=0;i<8;i++){
+    en[i]=38+i;
+    mt[i]=i;
+    pinMode(en[i],OUTPUT);
+    digitalWrite(en[i],HIGH);
+  }
+  /*
+  pinMode(en[0],OUTPUT);
+  pinMode(en[1],OUTPUT);
+  pinMode(en[2],OUTPUT);
+  pinMode(en[3],OUTPUT);
+  pinMode(en[4],OUTPUT);
+  pinMode(en[5],OUTPUT);
+  pinMode(en[6],OUTPUT);
+  pinMode(en[7],OUTPUT);
+  */
 }
 
 void loop() {
